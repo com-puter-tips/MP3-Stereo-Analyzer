@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mp3-stereo-analyzer"
+version = "1.0.0"
+description = "Verify that MP3 files play correctly in both the left and right earbuds (channel silence, RMS, stereo balance)."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "BSD-3-Clause" }
+authors = [
+    { name = "Devharsh Trivedi", email = "devharsh.1592@gmail.com" },
+]
+keywords = ["mp3", "audio", "stereo", "earbuds", "audio-analysis", "rms", "channel-balance"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Multimedia :: Sound/Audio :: Analysis",
+]
+dependencies = [
+    "pydub",
+    "audioop-lts; python_version >= '3.13'",
+]
+
+[project.urls]
+Homepage = "https://github.com/com-puter-tips/MP3-Stereo-Analyzer"
+Repository = "https://github.com/com-puter-tips/MP3-Stereo-Analyzer"
+Issues = "https://github.com/com-puter-tips/MP3-Stereo-Analyzer/issues"
+
+[project.scripts]
+mp3-stereo-analyzer = "mp3_stereo_analyzer:main"
+
+[tool.setuptools]
+py-modules = ["mp3_stereo_analyzer"]

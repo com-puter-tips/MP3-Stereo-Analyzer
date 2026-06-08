@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata from this file."
+type: software
+title: "MP3-Stereo-Analyzer"
+abstract: "A Python tool to verify if MP3 files are correctly formatted to play in both the left and right earbuds. It checks for channel silence, average volume (RMS), and stereo balance."
+authors:
+  - given-names: "Devharsh"
+    family-names: "Trivedi"
+    name-suffix: "Ph.D., CISSP"
+    email: "devharsh.1592@gmail.com"
+    city: "Washington"
+    region: "D.C."
+    post-code: "20003"
+    country: "US"
+version: "1.0.0"
+date-released: "2026-06-07"
+license: "BSD-3-Clause"
+repository-code: "https://github.com/com-puter-tips/MP3-Stereo-Analyzer"
+url: "https://github.com/com-puter-tips/MP3-Stereo-Analyzer"
+keywords:
+  - "mp3"
+  - "audio"
+  - "stereo"
+  - "earbuds"
+  - "audio-analysis"
+  - "rms"
+  - "channel-balance"
