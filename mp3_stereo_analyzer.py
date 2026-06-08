@@ -1,13 +1,44 @@
 import os
 import sys
+import shutil
 import argparse
+import subprocess
 from pydub import AudioSegment
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 # Constants
 SILENCE_THRESHOLD = -90.0  # dBFS
 BALANCE_THRESHOLD = 10.0   # Max allowed difference between L/R for a 'Balanced' checkmark
+
+def get_bitrate_kbps(file_path, audio):
+    """Return the MP3 bitrate in kbps (e.g. 128, 192).
+
+    Prefers ffprobe (part of the FFmpeg dependency). Falls back to estimating
+    from file size and duration when ffprobe is unavailable.
+    """
+    ffprobe = shutil.which("ffprobe")
+    if ffprobe:
+        try:
+            out = subprocess.run(
+                [ffprobe, "-v", "error", "-select_streams", "a:0",
+                 "-show_entries", "stream=bit_rate:format=bit_rate",
+                 "-of", "default=noprint_wrappers=1:nokey=1", file_path],
+                capture_output=True, text=True, timeout=30,
+            )
+            for token in out.stdout.split():
+                if token.isdigit() and int(token) > 0:
+                    return round(int(token) / 1000)
+        except Exception:
+            pass
+    # Fallback: approximate average bitrate from file size and duration.
+    try:
+        duration = len(audio) / 1000.0
+        if duration > 0:
+            return round(os.path.getsize(file_path) * 8 / duration / 1000)
+    except Exception:
+        pass
+    return None
 
 def analyze_audio(file_path):
     if not os.path.exists(file_path):
@@ -28,7 +59,9 @@ def analyze_audio(file_path):
     channels = audio.channels
     duration = len(audio) / 1000.0
 
-    print(f"[i] Format: {channels} Channels | {audio.frame_rate}Hz | {audio.sample_width*8}-bit")
+    bitrate = get_bitrate_kbps(file_path, audio)
+    bitrate_str = f" | {bitrate} kbps" if bitrate else ""
+    print(f"[i] Format: {channels} Channels | {audio.frame_rate}Hz | {audio.sample_width*8}-bit{bitrate_str}")
     print(f"[i] Duration: {duration:.2f} seconds")
     print("\n--- Running Diagnostic Tests ---")
 
