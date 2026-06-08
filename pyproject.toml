@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mp3-stereo-analyzer"
-version = "1.0.0"
+version = "1.1.0"
 description = "Verify that MP3 files play correctly in both the left and right earbuds (channel silence, RMS, stereo balance)."
 readme = "README.md"
 requires-python = ">=3.8"
@@ -30,6 +30,7 @@ classifiers = [
 ]
 dependencies = [
     "pydub",
+    "numpy",
     "audioop-lts; python_version >= '3.13'",
 ]
 

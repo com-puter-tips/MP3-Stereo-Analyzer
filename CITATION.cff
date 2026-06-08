@@ -12,7 +12,7 @@ authors:
     region: "D.C."
     post-code: "20003"
     country: "US"
-version: "1.0.0"
+version: "1.1.0"
 date-released: "2026-06-07"
 license: "BSD-3-Clause"
 repository-code: "https://github.com/com-puter-tips/MP3-Stereo-Analyzer"
